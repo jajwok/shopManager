@@ -1,11 +1,131 @@
-<GridLayout>
-    button: enterNameButton.__self__
-    
-    GridLayout:
-        cols: 1
-    Label:
-        text: "Supermarket Tycoon"
-    Button:
-        text: "Enter name"
-        on_press: getName()  
-        id: enterNameButton  
+<DataEntry>:
+
+    # 2. Input Container for your fields
+    BoxLayout:
+        size: root.width, root.height
+        padding: 20
+        orientation: 'vertical'
+        spacing: 10
+        minimum_width: 100
+        Label:
+            markup: True
+            text: '[b][u]Record sale[/u][/b]'
+            font_size: 20
+            color: 1,0,0,1
+
+        BoxLayout:
+            orientation: 'horizontal'
+            Label:
+                text: 'Item :'
+                font_size: 20
+            Spinner:
+                id: enterNameButton
+                text: 'Item'
+                values: 'Eggs', 'Cooking Oil', 'Milk'
+                font_size: 20
+                id: item_input
+                
+
+        BoxLayout:
+            orientation: 'horizontal'
+            spacing: 10
+            Label:
+                text: 'Quantity :'
+                font_size: 20
+                halign: 'left'
+                id: quantity_input
+                on_text: app.root.calculate_amount()
+
+            TextInput:
+                multiline: False
+                input_filter: 'int'
+                font_size: 20
+                size_hint_y: None
+                height: self.minimum_height
+                
+
+        BoxLayout:
+            orientation: 'horizontal'
+            spacing: 10
+
+            Label: 
+                text: 'Amount :'
+                font_size: 20
+            Label:
+                text: ''
+                font_size: 20
+                id: amount_label
+                
+
+
+
+        BoxLayout:
+            orientation: 'horizontal'
+            Label:
+                text: 'Payment method :'
+                font_size: 20
+                text_size: self.size 
+                halign: 'center'
+                valign: 'middle'
+            Spinner:
+                id: paymentMode
+                text: 'Paid with..'
+                values: 'Cash', 'Pochi', 'Till'
+                font_size: 20
+                id: payment_method_input
+#------------------------------------------
+        BoxLayout:
+            orientation: 'horizontal'
+
+            Label:
+                text: 'Notes :'
+                font_size: 20
+            TextInput:
+                multiline: True
+                size_hint_y: None
+                height: 40
+                id: notes_input
+#---------------------------------
+        
+        Label:
+            markup: True
+            text: '[b][u]Client particulars[/u][/b]'           
+            font_size: 20
+            color: 1,0,0,1
+ #--------------------------------           
+        BoxLayout:
+            orientation: 'horizontal'
+            Label:
+                text: 'Gender :'
+                font_size: 20
+            Spinner:
+                values: 'M','F'
+                font_size: 20
+                text: 'Gender'
+                id: gender_input
+
+
+        BoxLayout:
+            orientation: 'horizontal'
+            Label:
+                text: 'Demographic :'
+                font_size: 20
+            Spinner:
+                values: 'Adult','Teen','Child'
+                font_size: 20
+                text: 'Age range'
+                id: age_input
+
+        BoxLayout:
+            orientation: 'horizontal'
+            
+
+            Button:              
+                text: 'Save'
+                id: saveSaleBtn
+                font_size: 20
+                size_hint_y: None
+                height: 40
+                background_normal: ''       # Removes the default grey gradient image texture
+                background_color: 1, 0, 0, 1
+                on_press: root.get_widget_values()
